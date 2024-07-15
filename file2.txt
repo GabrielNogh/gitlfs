@@ -1,0 +1,22 @@
+s a quick start guide on how to integrate Git LFS in your Git repository, using Artifactory as the LFS server.
+
+Prerequisites
+'git' client installed (verify using $ git --version)
+Git LFS local repository in Artifactory
+
+Step-By-Step guide
+1. Download and install the Git LFS client. (verify using $ git lfs version)
+2. Navigate to the root folder of a Git project you would like to set up LFS for. Alternatively, you can clone a project or create a new one. Verify it is has successfully connected to the Git repository.
+($ git status)
+3. In order to initiate Git LFS, run the following in the root directory of your project:
+$ git lfs install
+4. When using Git LFS, you have to specify which files you want to be tracked by the Git LFS client. You can specify specific files or by using wildcards. In this example, we will configure the Git LFS client to track all "*.zip" files in our project.
+$ git lfs track "*.zip"
+5. The above command has created a .gitattributes file in the project root directory. This file is crucial for the LFS client, and needs to be added and pushed to the remote Git provider:
+$ git add .gitattributes
+6. Add any *.zip file to the project directory (Note! Make sure the added file isn't an "empty" file as the LFS client will identify that and will not apply the LFS logic) and add them to the Git project:
+$ git add test.zip
+7. Commit the changes and added files:
+$ git commit -m "testing Git LFS"
+8. Prior to "pushing", we need to configure the Git LFS server (Artifactory).
+Copy the content from the "Set Me Up" of the Git LFS repository in Artifactory to the .lfsconfig file in the root of your project. If the file doesn't exist, create it. This is how the file should look like:
